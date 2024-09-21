@@ -33,6 +33,35 @@ scatterplot <- ggplot(data = penguins, aes(x = bill_length_mm, y = flipper_lengt
 print(scatterplot)
 
 ggsave(filename = "scatterplot_flipper_vs_bill.png", plot = scatterplot)
+```
 
+## Problem 2
+### Create a data frame:
+```{r}
+library(tidyverse)
+set.seed(2024)
+
+df <- data.frame(
+  random_sample = rnorm(10),                         
+  logical_vector = rnorm(10) > 0,                       
+  character_vector = letters[1:10],                    
+  factor_vector = factor(rep(c("Level1", "Level2", "Level3"), length.out = 10))  
+)
+print(df)
+```
+
+### Take the mean of each variable
+```{r}
+mean_random_sample <- mean(pull(df, random_sample)) # Works because it's numeric
+mean_logical_vector <- mean(pull(df, logical_vector)) # Works because TRUE = 1, FALSE = 0
+mean_character_vector <- mean(pull(df, character_vector)) # Error because it's a character 
+mean_factor_vector <- mean(pull(df, factor_vector)) # Error because it's a factor
+```
+
+### Convert variables from one type to another
+```{r}
+numeric_logical <- as.numeric(df$logical_vector) # TRUE = 1, FALSE = 0
+numeric_character <- as.numeric(df$character_vector) # Converts to NA because characters cannot become to numeric
+numeric_factor <- as.numeric(df$factor_vector) # Converts to the next level
 ```
 
