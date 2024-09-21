@@ -1,0 +1,11 @@
+---
+title: "p8105_hw1_tz2659"
+author: "Tracy Zhu"
+date: "2024-09-21"
+output: html_document
+---
+## Problem 1
+```{r}
+data("penguins", package = "palmerpenguins")
+```
+
