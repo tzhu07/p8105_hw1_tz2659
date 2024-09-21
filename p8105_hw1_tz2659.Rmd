@@ -9,3 +9,30 @@ output: html_document
 data("penguins", package = "palmerpenguins")
 ```
 
+The `penguins` dataset contains `r nrow(penguins)` rows and `r ncol(penguins)` columns. This dataset measures 3 species of penguins (`r paste(unique(penguins$species), collapse = ", ")`) on 3 places: `r paste(unique(penguins$island), collapse = ", ")`.
+
+The important variables includes: 
+1. Species: The three species are `r paste(unique(penguins$species), collapse = ", ")`.
+2. Island: Penguins were observed on `r paste(unique(penguins$island), collapse = ", ")`.
+3. Bill Length (bill_length_mm): This variable ranges from `r range(penguins$bill_length_mm, na.rm = TRUE)[1]` mm to `r range(penguins$bill_length_mm, na.rm = TRUE)[2]` mm.
+4. Bill Depth (bill_depth_mm): This variable ranges from `r range(penguins$bill_depth_mm, na.rm = TRUE)[1]` mm to `r range(penguins$bill_depth_mm, na.rm = TRUE)[2]` mm.
+5. Flipper Length (flipper_length_mm): The length ranges from `r range(penguins$flipper_length_mm, na.rm = TRUE)[1]` mm to `r range(penguins$flipper_length_mm, na.rm = TRUE)[2]` mm. The mean is `r round(mean(penguins$flipper_length_mm, na.rm = TRUE), 2)` mm.
+6. Body Mass (body_mass_g): This variable ranges from `r range(penguins$body_mass_g, na.rm = TRUE)[1]` g to `r range(penguins$body_mass_g, na.rm = TRUE)[2]` g.
+7. Year (year): Year is from `r range(penguins$year, na.rm = TRUE)[1]` to `r range(penguins$year, na.rm = TRUE)[2]`
+8. The dataset also includes the `sex` of the penguins which are female and male.
+
+```{r}
+library(ggplot2)
+
+scatterplot <- ggplot(data = penguins, aes(x = bill_length_mm, y = flipper_length_mm, color = species)) +
+  geom_point() +
+  labs(x = "Bill Length (mm)",
+       y = "Flipper Length (mm)",
+       color = "Species") +  
+  theme_minimal()
+print(scatterplot)
+
+ggsave(filename = "scatterplot_flipper_vs_bill.png", plot = scatterplot)
+
+```
+
